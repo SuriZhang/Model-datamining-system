@@ -1,47 +1,63 @@
-// exception class
+// exceptions 
 #ifndef _EXCEPT_H
 #define _EXCEPT_H
 #include <string>
 using namespace std;
-// server exception
-class ServerException : public exception {
+// client expection
+class ClientException : public exception {
 public:
-	ServerException (void) :
-		m_msg ("Server Exception!") {}
-	ServerException (string const& msg) :
-		m_msg ("Server Exception:") {
+	ClientException (void) :
+		m_msg ("Client exception!") {}
+	ClientException (string const& msg) :
+		m_msg ("Client expe :") {
 		m_msg += msg;
 		m_msg += "！";
 	}
-	~ServerException (void) throw () {}
+	~ClientException (void) throw () {}
 	char const* what (void) const throw () {
 		return m_msg.c_str ();
 	}
 private:
 	string m_msg;
 };
-// Database exception
-class DBException : public ServerException {
+// Backup Exception
+class BackupException : public ClientException {
 public:
-	DBException (void) :
-		ServerException ("Database exception!") {}
-	DBException (string const& msg) :
-		ServerException (msg) {}
+	BackupException (void) :
+		ClientException ("Backup Error.") {}
+	BackupException (string const& msg) :
+		ClientException (msg) {}
 };
-// socekt excepion
-class SocketException : public ServerException {
+// Read Exception
+class ReadException : public ClientException {
+public:
+	ReadException (void) :
+		ClientException ("Read Error.") {}
+	ReadException (string const& msg) :
+		ClientException (msg) {}
+};
+// Save Exception
+class SaveException : public ClientException {
+public:
+	SaveException (void) :
+		ClientException ("Save Error.") {}
+	SaveException (string const& msg) :
+		ClientException (msg) {}
+};
+// Socket Exception
+class SocketException : public ClientException {
 public:
 	SocketException (void) :
-		ServerException ("Socket Exception!") {}
+		ClientException ("Socket Error.") {}
 	SocketException (string const& msg) :
-		ServerException (msg) {}
+		ClientException (msg) {}
 };
-// Thread exceptions
-class ThreadException : public ServerException {
+// Send Exception
+class SendException : public ClientException {
 public:
-	ThreadException (void) :
-		ServerException ("Thread Exception!") {}
-	ThreadException (string const& msg) :
-		ServerException (msg) {}
+	SendException (void) :
+		ClientException ("Send Error.") {}
+	SendException (string const& msg) :
+		ClientException (msg) {}
 };
 #endif // _EXCEPT_H

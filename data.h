@@ -4,7 +4,14 @@
 #include <unistd.h>
 #include <iostream>
 using namespace std;
-// match log results
+// Login and log out records
+struct LogRec {
+	char  logname[32]; 
+	char  logip[32];   
+	pid_t pid;         
+	long  logtime;     
+};
+// Match log
 struct MLogRec {
 	char  logname[32]; 
 	char  logip[32];   
